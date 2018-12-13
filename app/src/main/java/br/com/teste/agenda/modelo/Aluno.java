@@ -1,6 +1,8 @@
 package br.com.teste.agenda.modelo;
 
-public class Aluno {
+import java.io.Serializable;
+
+public class Aluno implements Serializable {
     private Long id;
     private String nome;
     private String endereco;
@@ -54,5 +56,10 @@ public class Aluno {
 
     public void setNota(Double nota) {
         this.nota = nota;
+    }
+
+    @Override
+    public String toString() {
+        return getId() + " - " + getNome();
     }
 }
