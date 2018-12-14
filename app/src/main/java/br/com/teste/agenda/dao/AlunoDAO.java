@@ -92,6 +92,6 @@ public class AlunoDAO extends SQLiteOpenHelper {
         ContentValues dados = pegaDadosDoAluno(aluno);
         String[] params = {aluno.getId().toString()};
         db.update("Alunos",dados,"id = ?",params);
-        
+
     }
 }
