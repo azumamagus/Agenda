@@ -1,8 +1,12 @@
 package br.com.teste.agenda;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Browser;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -79,6 +83,42 @@ public class ListaAlunosActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
 
+        //CALL PHONE
+        MenuItem itemLigar = menu.add("Ligar");
+
+        //ouvindo para pedir permissão
+        itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if(ActivityCompat.checkSelfPermission(ListaAlunosActivity.this,Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(ListaAlunosActivity.this,
+                            new String[]{Manifest.permission.CALL_PHONE},123);
+                }else{
+                    Intent intentLigar = new Intent(Intent.ACTION_CALL);
+                    intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
+                    startActivity(intentLigar);
+                }
+
+                return false;
+            }
+        });
+
+        //SMS
+        MenuItem itemSMS = menu.add("Enviar SMS");
+        Intent intentSMS = new Intent(Intent.ACTION_VIEW);
+        intentSMS.setData(Uri.parse("sms:" + aluno.getTelefone()));
+        itemSMS.setIntent(intentSMS);
+
+        //MAPA
+        MenuItem itemMapa = menu.add("Visualizar no mapa");
+        Intent intentMapa = new Intent(Intent.ACTION_VIEW);
+        //Pegando o endereço com nivel de zoom
+        //intentMapa.setData(Uri.parse("geo:0,0?z=14&q=" + aluno.getEndereco()));
+        intentMapa.setData(Uri.parse("geo:0,0?q=" + aluno.getEndereco()));
+        itemMapa.setIntent(intentMapa);
+
+        //SITE
         MenuItem itemSite = menu.add("Visitar Site");
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
 
@@ -91,6 +131,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         itemSite.setIntent(intentSite);
 
+        //DELETAR
         MenuItem deletar = menu.add("Deletar");
 
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -108,5 +149,4 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
 
     }
-
 }
