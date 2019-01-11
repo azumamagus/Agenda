@@ -30,6 +30,15 @@
         </activity>
 
         <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="br.com.teste.agenda.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"
             android:authorities="br.com.teste.agenda.com.android.tools.ir.server.InstantRunContentProvider"
             android:multiprocess="true" />

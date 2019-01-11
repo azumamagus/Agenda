@@ -620,6 +620,7 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable fundo
+drawable fundo_camera
 drawable ic_camera
 drawable ic_confirmar
 drawable ic_enviar
@@ -706,7 +707,9 @@ id fill
 id fill_horizontal
 id fill_vertical
 id forever
+id formulario_botao_foto
 id formulario_endereco
+id formulario_foto
 id formulario_nome
 id formulario_nota
 id formulario_site
@@ -1260,3 +1263,4 @@ styleable Toolbar android_gravity android_minHeight buttonGravity collapseConten
 styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
+xml provider_paths

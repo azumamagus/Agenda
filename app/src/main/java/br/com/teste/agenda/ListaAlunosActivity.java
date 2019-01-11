@@ -86,20 +86,19 @@ public class ListaAlunosActivity extends AppCompatActivity {
         //CALL PHONE
         MenuItem itemLigar = menu.add("Ligar");
 
-        //ouvindo para pedir permissão
+        //Ouvindo o menu ligar
         itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if(ActivityCompat.checkSelfPermission(ListaAlunosActivity.this,Manifest.permission.CALL_PHONE)
-                        != PackageManager.PERMISSION_GRANTED){
+            public boolean onMenuItemClick(MenuItem item) {
+                if (ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(ListaAlunosActivity.this,
-                            new String[]{Manifest.permission.CALL_PHONE},123);
-                }else{
+                            new String[]{Manifest.permission.CALL_PHONE}, 123);
+                } else {
                     Intent intentLigar = new Intent(Intent.ACTION_CALL);
                     intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
                     startActivity(intentLigar);
                 }
-
                 return false;
             }
         });
