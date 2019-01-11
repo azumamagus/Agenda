@@ -26,6 +26,7 @@ import br.com.teste.agenda.modelo.Aluno;
 public class ListaAlunosActivity extends AppCompatActivity {
 
     private ListView listaAlunos;
+    private Aluno aluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
                 Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(position);
 
-                Intent intentVaiProFormulario = new Intent(ListaAlunosActivity.this,FormularioActivity.class);
-                intentVaiProFormulario.putExtra("aluno",aluno);
+                Intent intentVaiProFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                intentVaiProFormulario.putExtra("aluno", aluno);
                 startActivity(intentVaiProFormulario);
             }
         });
@@ -51,7 +52,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         novoAluno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentVaiProFormulario = new Intent(ListaAlunosActivity.this,FormularioActivity.class);
+                Intent intentVaiProFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
                 startActivity(intentVaiProFormulario);
             }
         });
@@ -66,7 +67,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
 
         //convertendo String para View
-        ArrayAdapter<Aluno> adapter =  new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1,alunos);
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
         listaAlunos.setAdapter(adapter);
     }
 
@@ -78,18 +79,37 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 123:
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Intent intentLigar = new Intent(Intent.ACTION_CALL);
+                        intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
+                        startActivity(intentLigar);
+                    }
+                } else {
+                    Toast.makeText(ListaAlunosActivity.this,
+                            "A permissão é necessária",
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
+        aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
 
         //CALL PHONE
         MenuItem itemLigar = menu.add("Ligar");
 
-        //Ouvindo o menu ligar
+        //ouvindo para pedir permissão
         itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
+            public boolean onMenuItemClick(MenuItem menuItem) {
                 if (ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.CALL_PHONE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(ListaAlunosActivity.this,
@@ -99,6 +119,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
                     startActivity(intentLigar);
                 }
+
                 return false;
             }
         });
@@ -122,7 +143,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
 
         String site = aluno.getSite();
-        if(!site.startsWith("http://")){
+        if (!site.startsWith("http://")) {
             site = "http://" + site;
         }
 
