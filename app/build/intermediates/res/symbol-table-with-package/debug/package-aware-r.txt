@@ -725,6 +725,9 @@ id image
 id info
 id invisible
 id italic
+id item_foto
+id item_nome
+id item_telefone
 id left
 id line1
 id line3
@@ -834,6 +837,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_formulario
 layout activity_lista_alunos
+layout list_item
 layout notification_action
 layout notification_action_tombstone
 layout notification_template_custom_big
