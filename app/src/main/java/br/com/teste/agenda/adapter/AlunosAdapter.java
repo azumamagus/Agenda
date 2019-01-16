@@ -1,14 +1,19 @@
 package br.com.teste.agenda.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import br.com.teste.agenda.ListaAlunosActivity;
+import br.com.teste.agenda.R;
 import br.com.teste.agenda.modelo.Aluno;
 
 public class AlunosAdapter extends BaseAdapter {
@@ -20,26 +25,47 @@ public class AlunosAdapter extends BaseAdapter {
         this.alunos = alunos;
     }
 
-    @Override
+    @Override //Quantidade de itens na lista
     public int getCount() {
         return alunos.size();
     }
 
-    @Override
+    @Override //o item na posição
     public Object getItem(int position) {
         return alunos.get(position);
     }
 
-    @Override
+    @Override //o id do item
     public long getItemId(int position) {
         return alunos.get(position).getId();
     }
 
-    @Override
+    @Override // cada item na tela
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView view = new TextView(context);
         Aluno aluno = alunos.get(position);
-        view.setText(aluno.toString());
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = convertView;
+        if (view == null) {
+            view = inflater.inflate(R.layout.list_item, parent, false);
+        }
+
+        TextView campoNome = view.findViewById(R.id.item_nome);
+        campoNome.setText(aluno.getNome());
+
+        TextView campoTelefone = view.findViewById(R.id.item_telefone);
+        campoTelefone.setText(aluno.getTelefone());
+
+        ImageView campoFoto = view.findViewById(R.id.item_foto);
+        String caminhoFoto = aluno.getCaminhoFoto();
+
+        if(caminhoFoto != null){
+            Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
+            Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
+            campoFoto.setImageBitmap(bitmapReduzido);
+            campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
+        }
+
         return view;
     }
 }

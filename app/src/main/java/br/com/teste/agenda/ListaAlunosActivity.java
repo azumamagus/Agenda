@@ -34,6 +34,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
 
+        /*if (checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[] { Manifest.permission.RECEIVE_SMS } , CODIGO_SMS);
+        }*/
 
         //Pegando Refência do XML
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
