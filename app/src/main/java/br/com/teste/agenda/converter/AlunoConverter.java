@@ -12,7 +12,7 @@ public class AlunoConverter {
         try {
             JSONStringer jsonStringer = new JSONStringer();
             jsonStringer.object().key("list").array()
-                    .object().key("sluno").array();
+                    .object().key("aluno").array();
 
             for (Aluno aluno : alunos) {
                 jsonStringer.object()
