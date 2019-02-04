@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import br.com.teste.agenda.ListaAlunosActivity;
@@ -58,6 +60,16 @@ public class AlunosAdapter extends BaseAdapter {
 
         ImageView campoFoto = view.findViewById(R.id.item_foto);
         String caminhoFoto = aluno.getCaminhoFoto();
+
+        TextView campoEndereco = view.findViewById(R.id.item_endereco);
+        if(campoEndereco != null){
+            campoEndereco.setText(aluno.getEndereco());
+        }
+
+        TextView campoSite = view.findViewById(R.id.item_site);
+        if(campoSite != null){
+            campoSite.setText(aluno.getSite());
+        }
 
         if(caminhoFoto != null){
             Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);

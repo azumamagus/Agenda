@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="campo_nome">Name</string>
+    <string name="campo_endereco">Address</string>
+    <string name="campo_telefone">Phone</string>
+    <string name="campo_site">Site</string>
+</resources>

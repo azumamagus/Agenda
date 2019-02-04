@@ -20,7 +20,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity android:name="br.com.teste.agenda.ListaAlunosActivity" >
             <intent-filter>
@@ -29,8 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="br.com.teste.agenda.FormularioActivity" >
-        </activity>
+        <activity android:name="br.com.teste.agenda.FormularioActivity" />
 
         <receiver
             android:name="br.com.teste.agenda.receiver.SmsReceiver"
@@ -49,6 +47,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name="br.com.teste.agenda.ProvasActivity" />
     </application>
 
 </manifest>

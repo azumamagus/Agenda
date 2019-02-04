@@ -30,22 +30,22 @@
 
         <EditText
             android:id="@+id/formulario_nome"
-            android:hint="Nome"
+            android:hint="@string/campo_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/formulario_endereco"
-            android:hint="Endereco"
+            android:hint="@string/campo_endereco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/formulario_telefone"
-            android:hint="Telefone"
+            android:hint="@string/campo_telefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/formulario_site"
-            android:hint="Site"
+            android:hint="@string/campo_site"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <RatingBar
